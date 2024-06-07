@@ -38,7 +38,7 @@ Fine-tuning layers that are conditioned on the text embeddings gives rise to the
 Another problem is the possibility of reduced output diversity. Text-to-image diffusion models naturally possess high amounts of output diversity. When fine-tuning a small set of images, we would like to be able to generate the subject in novel viewpoints, poses, and articulations. Yet, there is a risk of reducing the amount of variability in the output poses and views of the subject.
 To mitigate the two aforementioned issues, the paper proposes an autogenous class-specific prior preservation loss that encourages diversity and counters language drift. The method is to supervise the model with its own generated samples, in order for it to retain the prior once the few-shot fine-tuning begins. This allows it to generate diverse images of the class prior, as well as retain knowledge about the class prior that it can use in conjunction with knowledge about the subject instance.
 
-<img width="432" alt="image" src="https://github.com/satvikkk/dreambooth/assets/57042606/63784b44-dc48-4c8f-b1fd-9fd03698dd83">
+<img width="432" alt="image" src="https://github.com/satvikkk/dreambooth/raw/main/generated_images/formula.png">
 
 
 # Training [`↩`](#jumpto)
@@ -56,56 +56,50 @@ Here, Satvik is the rare vocabulary token, and person is the class prior to the 
 
 # Results [`↩`](#jumpto)
  
-It turns out that LoRA + Dreambooth with 1000 steps works decently well on human faces as well. Prior-Preservation definitely improves the model (as seen from images below). For me, the PNDM Scheduler works well with just 50 timesteps and DDIM with 80 timesteps. 
+It turns out that LoRA + Dreambooth with 1000 steps works decently well on human faces as well. Prior-Preservation definitely improves the model (as seen from the images below). For me, the PNDM Scheduler works well with just 50 timesteps and DDIM with 80 timesteps. 
 
+## Recontextualization
 ```
-prompt = "a painting of rraj person at Oktoberfest"
+prompt = "A picture of Satvik person in a wedding wearing traditional Indian clothes."
 ```
 
 ![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/wedding.png)
 
 ## Art Renditions
 ```
-prompt = "a painting of rraj person in the style of Van Gogh"
+prompt = "A painting of Satvik person in the style of Starry Night by Van Gogh."
 ```
-![image](https://github.com/rajlm10/dreambooth_lora_merging/assets/57042606/9ac1efc8-0a80-4d20-ad46-a3e40cc48bec)
+![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/vangogh.png)
 
 ## Property Modification
 ```
-prompt = "a painting of rraj person with blonde hair"
+prompt = "A picture of Satvik person with blonde hair"
 ```
-![image](https://github.com/rajlm10/dreambooth_lora_merging/assets/57042606/90ce1e46-c89c-40fd-81d5-dbe886264c23)
+![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/blonde.png)
 
 ## Novel-View Synthesis
 ```
-prompt = "a side view photo of rraj person"
+prompt = "A back view photo of Satvik person"
 ```
-![image](https://github.com/rajlm10/dreambooth_lora_merging/assets/57042606/9d077d23-1800-42fb-a2ea-edf0c4fa8d6c)
+![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/back.png)
 
 ## Acccesorization
 ```
-prompt = "a of rraj person with sunglasses"
+prompt = "A picture of Satvik person with face mask."
 ```
-
-![image](https://github.com/rajlm10/dreambooth_lora_merging/assets/57042606/d56dd447-902a-44a1-99c6-3ef7d3f4e720)
+![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/facemask.png)
 
 # Merging Adapters [`↩`](#jumpto)
 I experiment with generating my images in pixel-art style using two merged adapters. Particularly, I experiment with generating my pictures merged with the [Pixel Art](https://huggingface.co/nerijs/pixel-art-xl) style.
 
 ```
-prompt = "pixel, a photo of rraj person wearing sunglasses"
+prompt = "pixel, a photo of Satvik person wearing sunglasses."
 ```
-![image](https://github.com/rajlm10/dreambooth_lora_merging/assets/57042606/72e3039d-1c60-46ef-9108-38447397473a)
-
- 
+![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/pixel.png)
 
 
 # Limitations [`↩`](#jumpto)
-Generating faces is **tough**, sometimes eyes and teeth are not rendered properly or could be mismatches. For instance, below, my eyes are rendered in green but are black in the training images.
-
-![image](https://github.com/rajlm10/dreambooth_lora_merging/assets/57042606/a50fc682-5f7f-4183-9680-5fd28d610915)
-
-
+Generating faces is **tough**; sometimes, eyes and teeth are not rendered properly or could be mismatched. 
 
 ## Compute Limits
 The GPU did not allow me to fine-tune the text encoder (2 text encoders in the case of SDXL). Fine-tuning text encoders certainly improves image generation quality.
