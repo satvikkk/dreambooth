@@ -62,7 +62,7 @@ It turns out that LoRA + Dreambooth with 1000 steps works decently well on human
 prompt = "a painting of rraj person at Oktoberfest"
 ```
 
-![wedding]((https://github.com/satvikkk/dreambooth/assets/58619255/473bddd5-7951-4e94-847d-096cc1307b4d))
+![image](https://github.com/satvikkk/dreambooth/blob/main/generated_images/wedding.png)
 
 ## Art Renditions
 ```
