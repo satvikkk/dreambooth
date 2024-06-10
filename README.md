@@ -38,7 +38,7 @@ Fine-tuning layers that are conditioned on the text embeddings gives rise to the
 Another problem is the possibility of reduced output diversity. Text-to-image diffusion models naturally possess high amounts of output diversity. When fine-tuning a small set of images, we would like to be able to generate the subject in novel viewpoints, poses, and articulations. Yet, there is a risk of reducing the amount of variability in the output poses and views of the subject.
 To mitigate the two aforementioned issues, the paper proposes an autogenous class-specific prior preservation loss that encourages diversity and counters language drift. The method is to supervise the model with its own generated samples, in order for it to retain the prior once the few-shot fine-tuning begins. This allows it to generate diverse images of the class prior, as well as retain knowledge about the class prior that it can use in conjunction with knowledge about the subject instance.
 
-<img width="432" alt="image" src="https://github.com/satvikkk/dreambooth/raw/main/generated_images/formula.png">
+<img width="432" alt="image" src="https://github.com/satvikkk/dreambooth/raw/main/images/formula.png">
 
 
 # Training [`↩`](#jumpto)
@@ -56,38 +56,61 @@ Here, Satvik is the rare vocabulary token, and person is the class prior to the 
 
 # Results [`↩`](#jumpto)
  
-It turns out that LoRA + Dreambooth with 1000 steps works decently well on human faces as well. Prior-Preservation definitely improves the model (as seen from the images below). For me, the PNDM Scheduler works well with just 50 timesteps and DDIM with 80 timesteps. 
+It turns out that LoRA + Dreambooth with 1000 steps works decently well on human faces as well. Prior-Preservation definitely improves the model (as seen from the images below). For me, the PNDM Scheduler works well with just 50 timesteps and DDIM with 80 timesteps.
 
 ## Recontextualization
 ```
 prompt = "A picture of Satvik person in a wedding wearing traditional Indian clothes."
 ```
 
-![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/wedding.png)
+### Without Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/without_prior/wedding.png)
+
+### With Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/with_prior/wedding.png)
 
 ## Art Renditions
 ```
 prompt = "A painting of Satvik person in the style of Starry Night by Van Gogh."
 ```
-![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/vangogh.png)
+
+### Without Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/without_prior/vangogh.png)
+
+### With Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/with_prior/vangogh.png)
 
 ## Property Modification
 ```
 prompt = "A picture of Satvik person with blonde hair"
 ```
-![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/blonde.png)
+
+### Without Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/without_prior/blonde.png)
+
+### With Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/with_prior/blonde.png)
+
 
 ## Novel-View Synthesis
 ```
 prompt = "A back view photo of Satvik person"
 ```
-![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/back.png)
+### Without Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/without_prior/back.png)
+
+### With Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/with_prior/back.png)
 
 ## Acccesorization
 ```
 prompt = "A picture of Satvik person with face mask."
 ```
-![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/facemask.png)
+### Without Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/without_prior/facemask.png)
+
+### With Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/with_prior/facemask.png)
 
 # Merging Adapters [`↩`](#jumpto)
 I experiment with generating my images in pixel-art style using two merged adapters. Particularly, I experiment with generating my pictures merged with the [Pixel Art](https://huggingface.co/nerijs/pixel-art-xl) style.
@@ -95,7 +118,11 @@ I experiment with generating my images in pixel-art style using two merged adapt
 ```
 prompt = "pixel, a photo of Satvik person wearing sunglasses."
 ```
-![image](https://github.com/satvikkk/dreambooth/raw/main/generated_images/pixel.png)
+### Without Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/without_prior/pixel.png)
+
+### With Prior Reservation
+![image](https://github.com/satvikkk/dreambooth/raw/main/images/with_prior/pixel.png)
 
 
 # Limitations [`↩`](#jumpto)
