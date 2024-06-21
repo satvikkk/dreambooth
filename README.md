@@ -23,7 +23,7 @@ This repo aims at using [Dreambooth](https://dreambooth.github.io/) to teach a D
 * <a id="jumpto"></a> [References](#references-)
 
 # Project Structure [`↩`](#jumpto)
-- The **data** directory contains 7 high resolution images of me. This folder also contains **prior.zip**, which contains 197 images of human faces (excluding my own). These images are used to train the model with prior preservation.
+- The **data** directory contains contains **prior.zip**, which contains 197 images of human faces (excluding my own). These images are used to train the model with prior preservation. I also uploaded 7 high-resolution images of me during fine-tuning (not uploaded here).
 - The **personalized-diffusion.ipynb** contains a notebook to train with and without Prior Preservation. 
 - The **train_dreambooth_lora_sdxl.py** notebook contains the model and the script to train it.
 - The **dreambooth-inference.ipynb** contains a comprehensive and structured inference of the models trained with and without Prior Preservation. This contains all the images generated from text prompts post-training.
